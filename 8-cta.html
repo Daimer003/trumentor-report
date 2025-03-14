@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruMentor - Plan de Acción Simplificado</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Iconos de Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Tailwind Config para los colores y estilos personalizados -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#e6f5ff',
+                            100: '#cceaff',
+                            200: '#99d6ff',
+                            300: '#66c1ff',
+                            400: '#33adff',
+                            500: '#0099ff',
+                            600: '#007acc',
+                            700: '#005c99',
+                            800: '#003d66',
+                            900: '#001f33'
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'heading': ['Poppins', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'modern': '0 20px 60px -15px rgba(0, 77, 128, 0.15), 0 8px 25px -10px rgba(0, 77, 128, 0.1)',
+                        'input': '0 2px 5px rgba(0, 77, 128, 0.08), 0 0 0 1px rgba(0, 77, 128, 0.05)',
+                        'button': '0 10px 25px -5px rgba(0, 153, 255, 0.25)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f0f9ff;
+        }
+
+        .progress-gradient {
+            background: linear-gradient(90deg, #0099ff, #33adff);
+        }
+        
+        .input-focus:focus {
+            box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.2);
+            border-color: #0099ff;
+        }
+        
+        .card-border {
+            border: 1px solid rgba(0, 153, 255, 0.1);
+        }
+        
+        .logo-bg {
+            background-color: #0099ff;
+        }
+        
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%230099ff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        .empresa-resaltado {
+            color: #0099ff;
+            font-weight: 600;
+        }
+        
+        .nombre-resaltado {
+            color: #0099ff;
+            font-weight: 600;
+        }
+        
+        /* Patrón de cuadrícula para el header de Plan de Acción */
+        .action-plan-pattern {
+            background-color: #0099ff;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 0h60v60H0z' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1'/%3E%3Cpath d='M15 0v60M30 0v60M45 0v60' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1'/%3E%3Cpath d='M0 15h60M0 30h60M0 45h60' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Nuevos estilos modernos para las tarjetas de fase */
+        .fase-card {
+            position: relative;
+            background: white;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1;
+        }
+        
+        .fase-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #0099ff, #66c1ff);
+            z-index: 2;
+        }
+        
+        .fase-card::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.05) 0%, rgba(255, 255, 255, 0) 60%);
+            z-index: -1;
+        }
+        
+        .fase-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -15px rgba(0, 77, 128, 0.2);
+        }
+        
+        .fase-card:hover .fase-number {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px -5px rgba(0, 153, 255, 0.4);
+        }
+        
+        .fase-number {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #0099ff, #33adff);
+            border-radius: 16px;
+            position: relative;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 6px 15px -5px rgba(0, 153, 255, 0.3);
+        }
+        
+        .fase-icon {
+            position: absolute;
+            bottom: -8px;
+            right: -8px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0099ff;
+            font-size: 18px;
+            box-shadow: 0 4px 10px -2px rgba(0, 77, 128, 0.2);
+        }
+        
+        .fase-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+        
+        .list-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            list-style-type: none;
+        }
+        
+        .list-icon {
+            color: #0099ff;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+            font-size: 1.25rem;
+            margin-top: 2px;
+        }
+        
+        .utility-box {
+            background: linear-gradient(135deg, #e6f5ff, #f0f9ff);
+            border-left: 3px solid #0099ff;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* Estilo para el CTA final */
+        .cta-gradient {
+            background: linear-gradient(135deg, #007acc, #0099ff);
+        }
+        
+        /* Efecto de onda para el header y CTA */
+        .wave-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .wave-bottom svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 46px;
+        }
+
+        .wave-bottom .shape-fill {
+            fill: #FFFFFF;
+            fill-opacity: 0.15;
+        }
+        
+        /* Eliminar puntos de la lista */
+        ul, ol {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans text-gray-800 relative bg-pattern">
+    <!-- Header con logo (simplificado) -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center">
+                <div class="logo-bg w-10 h-10 rounded-full flex items-center justify-center shadow-md mr-3">
+                    <span class="text-white text-xl font-heading font-bold">T</span>
+                </div>
+                <h1 class="text-2xl font-bold font-heading text-brand-500">TruMentor</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenedor principal -->
+    <main class="flex-grow pt-8 pb-16">
+        <div class="container mx-auto px-4">
+            <!-- Encabezado de la sección con patrón de cuadrícula y glasmorfismo -->
+            <div class="relative action-plan-pattern text-white rounded-2xl shadow-modern overflow-hidden mb-12">
+                <div class="px-10 py-12 relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4 text-center">Plan de Acción Simplificado y Próximos Pasos</h2>
+                    
+                    <div class="mt-8 bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 border border-white border-opacity-20 max-w-4xl mx-auto">
+                        <div class="flex items-center">
+                            <div class="mr-6 flex-shrink-0 hidden md:block">
+                                <div class="logo-bg w-16 h-16 rounded-full flex items-center justify-center shadow-lg">
+                                    <span class="text-white text-2xl font-bold font-heading">G</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-white text-lg leading-relaxed">
+                                    Para dar el siguiente paso en tu evolución, te compartimos un <span class="font-bold">mini-plan</span> que conecta con las <span class="font-bold">fases de TruMentor</span>. Estas sugerencias apuntan a que logres una estrategia más robusta, con acciones concretas que impulsen el crecimiento de <span class="empresa-resaltado text-brand-100">Amobla</span>.
+                                </p>
+                                <p class="text-white text-sm mt-4 italic">— Mentor Gru</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Onda decorativa en la parte inferior -->
+                <div class="wave-bottom">
+                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Sección de Fases del Plan de Acción (Rediseñadas) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+                <!-- Fase 1 -->
+                <div class="fase-card rounded-2xl shadow-lg p-8">
+                    <div class="fase-number">
+                        1
+                        <div class="fase-icon">
+                            <i class='bx bx-search-alt'></i>
+                        </div>
+                    </div>
+                    <h3 class="fase-title text-xl">Sumérgete en las Mejores Prácticas de tu Mercado</h3>
+                    <p class="text-gray-600 mb-5">
+                        En la <span class="font-bold text-brand-600">Fase de Análisis del Entorno</span> de TruMentor, podrás comparar en detalle tu negocio con referentes como <span class="font-medium">Herman Miller</span> o <span class="font-medium">BoConcept</span>. Observa:
+                    </p>
+                    <div class="space-y-4 mb-5">
+                        <div class="list-item">
+                            <i class='bx bx-check-circle list-icon'></i>
+                            <span class="text-gray-600">¿Qué aspectos de su propuesta de valor podrías adaptar a tu realidad?</span>
+                        </div>
+                        <div class="list-item">
+                            <i class='bx bx-bar-chart-alt-2 list-icon'></i>
+                            <span class="text-gray-600">¿Cómo usan el marketing digital y la experiencia del cliente para sobresalir?</span>
+                        </div>
+                    </div>
+                    <div class="utility-box">
+                        <p class="text-gray-700">
+                            <span class="text-brand-600 font-bold">Por qué es útil:</span> Conocer las estrategias de los líderes te inspirará para crear un diferenciador único, aprovechando las fortalezas que ya tienes.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Fase 2 -->
+                <div class="fase-card rounded-2xl shadow-lg p-8">
+                    <div class="fase-number">
+                        2
+                        <div class="fase-icon">
+                            <i class='bx bx-target-lock'></i>
+                        </div>
+                    </div>
+                    <h3 class="fase-title text-xl">Refinar tu Propuesta de Valor y Estrategia</h3>
+                    <p class="text-gray-600 mb-5">
+                        En la <span class="font-bold text-brand-600">Fase de Diseño de Propuesta de Valor</span>, TruMentor te guía para:
+                    </p>
+                    <div class="space-y-4 mb-5">
+                        <div class="list-item">
+                            <i class='bx bx-user-voice list-icon'></i>
+                            <span class="text-gray-600">Revisar tus segmentos de clientes, sus necesidades y sus motivaciones de compra.</span>
+                        </div>
+                        <div class="list-item">
+                            <i class='bx bx-target-lock list-icon'></i>
+                            <span class="text-gray-600">Establecer un perfil de producto/servicio que encaje exactamente con lo que buscan.</span>
+                        </div>
+                        <div class="list-item">
+                            <i class='bx bx-bulb list-icon'></i>
+                            <span class="text-gray-600">Identificar oportunidades para introducir diseños personalizados o servicios de asesoría.</span>
+                        </div>
+                    </div>
+                    <div class="utility-box">
+                        <p class="text-gray-700">
+                            <span class="text-brand-600 font-bold">Por qué es útil:</span> Un enfoque claro en lo que ofreces y para quién lo ofreces elevará tu competitividad y hará que tus esfuerzos de marketing sean más efectivos.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Fase 3 -->
+                <div class="fase-card rounded-2xl shadow-lg p-8">
+                    <div class="fase-number">
+                        3
+                        <div class="fase-icon">
+                            <i class='bx bx-task'></i>
+                        </div>
+                    </div>
+                    <h3 class="fase-title text-xl">Implementar un Sistema de Metas y Seguimiento</h3>
+                    <p class="text-gray-600 mb-5">
+                        En la <span class="font-bold text-brand-600">Fase de Planificación y Ejecución</span>, TruMentor te facilita la configuración de OKRs (Objetivos y Resultados Clave) o metas trimestrales. Así podrás:
+                    </p>
+                    <div class="space-y-4 mb-5">
+                        <div class="list-item">
+                            <i class='bx bx-calendar-check list-icon'></i>
+                            <span class="text-gray-600">Convertir cada proyecto en acciones concretas con responsables y plazos definidos.</span>
+                        </div>
+                        <div class="list-item">
+                            <i class='bx bx-dashboard list-icon'></i>
+                            <span class="text-gray-600">Dar seguimiento continuo usando un tablero compartido, visual y amigable para todo tu equipo.</span>
+                        </div>
+                        <div class="list-item">
+                            <i class='bx bx-revision list-icon'></i>
+                            <span class="text-gray-600">Ajustar en tiempo real si algo no va conforme a lo esperado.</span>
+                        </div>
+                    </div>
+                    <div class="utility-box">
+                        <p class="text-gray-700">
+                            <span class="text-brand-600 font-bold">Por qué es útil:</span> Trabajar con objetivos claros y medibles te ayudará a mantener la motivación y alinear a tu equipo hacia el mismo norte estratégico.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Fase 4 -->
+                <div class="fase-card rounded-2xl shadow-lg p-8">
+                    <div class="fase-number">
+                        4
+                        <div class="fase-icon">
+                            <i class='bx bx-group'></i>
+                        </div>
+                    </div>
+                    <h3 class="fase-title text-xl">Consolidar Liderazgo y Cultura de Crecimiento</h3>
+                    <p class="text-gray-600 mb-5">
+                        En la <span class="font-bold text-brand-600">Fase de Monitoreo y Cultura</span>, TruMentor propone:
+                    </p>
+                    <div class="space-y-4 mb-5">
+                        <div class="list-item">
+                            <i class='bx bx-chat list-icon'></i>
+                            <span class="text-gray-600">Programar encuentros periódicos de revisión y aprendizaje, en los que todos compartan ideas y avances.</span>
+                        </div>
+                        <div class="list-item">
+                            <i class='bx bx-body list-icon'></i>
+                            <span class="text-gray-600">Definir valores y comportamientos que fortalezcan la colaboración y la innovación en tu equipo.</span>
+                        </div>
+                        <div class="list-item">
+                            <i class='bx bx-trophy list-icon'></i>
+                            <span class="text-gray-600">Celebrar logros y reforzar la visión de largo plazo, para afianzar el sentido de pertenencia.</span>
+                        </div>
+                    </div>
+                    <div class="utility-box">
+                        <p class="text-gray-700">
+                            <span class="text-brand-600 font-bold">Por qué es útil:</span> Un ambiente donde cada colaborador entiende su contribución y se siente valorado es clave para la retención de talento y la mejora continua.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Final (rediseñado) -->
+            <div class="cta-gradient rounded-2xl shadow-modern overflow-hidden relative">
+                <div class="p-10 text-center relative z-10">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">¡Lleva este Plan a la Acción con TruMentor!</h3>
+                    <p class="text-white text-opacity-90 text-lg italic mb-6 max-w-3xl mx-auto">
+                        "Nada reemplaza la voluntad de mejorar, pero con la herramienta y la guía adecuadas, tu evolución será más rápida y segura."
+                    </p>
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 border border-white border-opacity-20 max-w-3xl mx-auto mb-8">
+                        <p class="text-white text-lg">
+                            <span class="font-bold">Próximo Paso Recomendado:</span> Solicita una <span class="font-bold">demo</span> o revisa nuestros planes para empezar a <span class="font-bold">construir tu estrategia</span> con TruMentor. ¡No dejes tus oportunidades de crecimiento en pausa!
+                        </p>
+                    </div>
+                    <button class="bg-white text-brand-600 hover:bg-gray-100 transition-all duration-300 font-semibold py-4 px-8 rounded-xl shadow-lg transform hover:scale-105">
+                        Solicitar Demo
+                    </button>
+                </div>
+                
+                <!-- Patrón ondulado en la parte inferior -->
+                <div class="wave-bottom">
+                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-md py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <div class="logo-bg w-8 h-8 rounded-full flex items-center justify-center shadow-sm mr-2">
+                        <span class="text-white text-sm font-heading font-bold">T</span>
+                    </div>
+                    <span class="text-sm text-gray-600">© 2025 TruMentor. Todos los derechos reservados.</span>
+                </div>
+                <div class="flex space-x-4 text-sm">
+                    <a href="#" class="text-gray-500 hover:text-brand-500 transition-colors">Ayuda</a>
+                    <a href="#" class="text-gray-500 hover:text-brand-500 transition-colors">Privacidad</a>
+                    <a href="#" class="text-gray-500 hover:text-brand-500 transition-colors">Términos</a>
+                    <a href="#" class="text-gray-500 hover:text-brand-500 transition-colors">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
