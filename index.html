@@ -1,0 +1,1960 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TruMentor - Reporte de Diagnóstico</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Iconos de Boxicons -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Tailwind Config para los colores y estilos personalizados -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: "#e6f5ff",
+                100: "#cceaff",
+                200: "#99d6ff",
+                300: "#66c1ff",
+                400: "#33adff",
+                500: "#0099ff",
+                600: "#007acc",
+                700: "#005c99",
+                800: "#003d66",
+                900: "#001f33",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              heading: ["Poppins", "sans-serif"],
+            },
+            boxShadow: {
+              modern:
+                "0 20px 60px -15px rgba(0, 77, 128, 0.15), 0 8px 25px -10px rgba(0, 77, 128, 0.1)",
+              input:
+                "0 2px 5px rgba(0, 77, 128, 0.08), 0 0 0 1px rgba(0, 77, 128, 0.05)",
+              button: "0 10px 25px -5px rgba(0, 153, 255, 0.25)",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      body {
+        background-color: #f0f9ff;
+      }
+
+      .progress-gradient {
+        background: linear-gradient(90deg, #0099ff, #33adff);
+      }
+      .input-focus:focus {
+        box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.2);
+        border-color: #0099ff;
+      }
+      .card-border {
+        border: 1px solid rgba(0, 153, 255, 0.1);
+      }
+      .logo-bg {
+        background-color: #0099ff;
+      }
+      .bg-pattern {
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%230099ff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+      }
+      .empresa-resaltado {
+        color: #0099ff;
+        font-weight: 600;
+      }
+      .nombre-resaltado {
+        color: #0099ff;
+        font-weight: 600;
+      }
+
+      /* Patrón de cuadrícula para el header de TruMentor */
+      .trumentor-pattern {
+        background-color: #0099ff;
+        background-image: url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 0h50v50H0z' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1'/%3E%3Cpath d='M10 0v50M20 0v50M30 0v50M40 0v50' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1'/%3E%3Cpath d='M0 10h50M0 20h50M0 30h50M0 40h50' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E");
+      }
+      /* Patrón específico para la dimensión de Claridad Estratégica */
+      .claridad-pattern {
+        background-color: #0099ff;
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='smallGrid' width='20' height='20' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 20 0 L 0 0 0 20' fill='none' stroke='%23ffffff' stroke-opacity='0.15' stroke-width='1'/%3E%3C/pattern%3E%3Cpattern id='compass' width='60' height='60' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='30' cy='30' r='20' fill='none' stroke='%23ffffff' stroke-opacity='0.2' stroke-width='1.5'/%3E%3Ccircle cx='30' cy='30' r='2' fill='%23ffffff' fill-opacity='0.2'/%3E%3Cpath d='M 30 10 L 30 2' stroke='%23ffffff' stroke-opacity='0.2' stroke-width='1.5'/%3E%3Cpath d='M 30 50 L 30 58' stroke='%23ffffff' stroke-opacity='0.2' stroke-width='1.5'/%3E%3Cpath d='M 10 30 L 2 30' stroke='%23ffffff' stroke-opacity='0.2' stroke-width='1.5'/%3E%3Cpath d='M 50 30 L 58 30' stroke='%23ffffff' stroke-opacity='0.2' stroke-width='1.5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23smallGrid)'%3E%3C/rect%3E%3Crect width='100%25' height='100%25' fill='url(%23compass)'%3E%3C/rect%3E%3C/svg%3E");
+      }
+
+      /* Patrón específico para la dimensión de Disciplina de Ejecución - SIMPLIFICADO */
+      .ejecucion-pattern {
+        background-color: #4f46e5;
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E %3C!-- Patrón de cuadrícula simple --%3E %3Crect width='100' height='100' fill='none'/%3E %3C!-- Checkboxes simples --%3E %3Crect x='10' y='10' width='10' height='10' rx='2' stroke='white' stroke-opacity='0.15' fill='none'/%3E %3Cpath d='M 12 15 L 15 18 L 19 12' stroke='white' stroke-opacity='0.2' fill='none'/%3E %3Crect x='40' y='40' width='10' height='10' rx='2' stroke='white' stroke-opacity='0.15' fill='none'/%3E %3Cpath d='M 42 45 L 45 48 L 49 42' stroke='white' stroke-opacity='0.2' fill='none'/%3E %3Crect x='70' y='70' width='10' height='10' rx='2' stroke='white' stroke-opacity='0.15' fill='none'/%3E %3Cpath d='M 72 75 L 75 78 L 79 72' stroke='white' stroke-opacity='0.2' fill='none'/%3E %3C/svg%3E");
+      }
+      /* Patrón específico para la dimensión de Generación de Valor */
+      .valor-pattern {
+        background-color: #0284c7;
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='valueGrid' width='40' height='40' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 20 0 L 20 40' stroke='white' stroke-opacity='0.1' stroke-width='1' fill='none'/%3E%3Cpath d='M 0 20 L 40 20' stroke='white' stroke-opacity='0.1' stroke-width='1' fill='none'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100' height='100' fill='url(%23valueGrid)'/%3E%3Cpath d='M 10 50 L 30 30 L 50 35 L 70 15' stroke='white' stroke-opacity='0.2' stroke-width='1.5' fill='none'/%3E%3Ccircle cx='10' cy='50' r='2' fill='white' fill-opacity='0.2'/%3E%3Ccircle cx='30' cy='30' r='2' fill='white' fill-opacity='0.2'/%3E%3Ccircle cx='50' cy='35' r='2' fill='white' fill-opacity='0.2'/%3E%3Ccircle cx='70' cy='15' r='2' fill='white' fill-opacity='0.2'/%3E%3Cpath d='M 40 60 L 50 50 L 60 60 L 50 70 Z' stroke='white' stroke-opacity='0.15' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      }
+      /* Patrón específico para la dimensión de Liderazgo y Cultura */
+      .liderazgo-pattern {
+        background-color: #1e40af;
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='networkGrid' width='40' height='40' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 40 20 L 0 20' stroke='white' stroke-opacity='0.1' stroke-width='1' fill='none'/%3E%3Cpath d='M 20 0 L 20 40' stroke='white' stroke-opacity='0.1' stroke-width='1' fill='none'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100' height='100' fill='url(%23networkGrid)'/%3E%3C!-- Personas conectadas --%3E%3Ccircle cx='20' cy='20' r='4' fill='white' fill-opacity='0.2'/%3E%3Ccircle cx='50' cy='30' r='5' fill='white' fill-opacity='0.2'/%3E%3Ccircle cx='80' cy='20' r='4' fill='white' fill-opacity='0.2'/%3E%3Ccircle cx='30' cy='60' r='4' fill='white' fill-opacity='0.2'/%3E%3Ccircle cx='70' cy='60' r='4' fill='white' fill-opacity='0.2'/%3E%3Ccircle cx='50' cy='80' r='4' fill='white' fill-opacity='0.2'/%3E%3Cpath d='M 20 20 L 50 30' stroke='white' stroke-opacity='0.15' stroke-width='1' fill='none'/%3E%3Cpath d='M 50 30 L 80 20' stroke='white' stroke-opacity='0.15' stroke-width='1' fill='none'/%3E%3Cpath d='M 30 60 L 50 30' stroke='white' stroke-opacity='0.15' stroke-width='1' fill='none'/%3E%3Cpath d='M 50 30 L 70 60' stroke='white' stroke-opacity='0.15' stroke-width='1' fill='none'/%3E%3Cpath d='M 30 60 L 50 80' stroke='white' stroke-opacity='0.15' stroke-width='1' fill='none'/%3E%3Cpath d='M 50 80 L 70 60' stroke='white' stroke-opacity='0.15' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen flex flex-col font-sans text-gray-800 relative bg-pattern"
+  >
+    <!-- Header con logo (simplificado) -->
+    <header class="bg-white shadow-sm">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center">
+          <div
+            class="logo-bg w-10 h-10 rounded-full flex items-center justify-center shadow-md mr-3"
+          >
+            <span class="text-white text-xl font-heading font-bold">T</span>
+          </div>
+          <h1 class="text-2xl font-bold font-heading text-brand-500">
+            TruMentor
+          </h1>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenedor principal -->
+    <main class="flex-grow pt-8 pb-16">
+      <div class="container mx-auto px-4">
+        <!-- Encabezado del reporte con nuevo patrón -->
+        <div
+          class="relative trumentor-pattern text-white rounded-2xl shadow-modern overflow-hidden mb-10"
+        >
+          <div class="px-10 py-16 relative z-10">
+            <h2
+              class="text-3xl md:text-4xl font-bold font-heading mb-4 text-center"
+            >
+              ¡Hola,
+              <span class="nombre-resaltado text-brand-100">María Fernanda</span
+              >!
+            </h2>
+            <h3 class="text-2xl font-semibold font-heading mb-6 text-center">
+              Bienvenida a tu Diagnóstico TruMentor
+            </h3>
+
+            <div
+              class="flex items-center mt-8 max-w-4xl mx-auto bg-white bg-opacity-10 rounded-xl p-6 backdrop-blur-sm border border-white border-opacity-20"
+            >
+              <div class="mr-6 flex-shrink-0 hidden md:block">
+                <div
+                  class="logo-bg w-16 h-16 rounded-full flex items-center justify-center shadow-lg"
+                >
+                  <span class="text-white text-2xl font-bold font-heading"
+                    >G</span
+                  >
+                </div>
+              </div>
+              <div>
+                <p class="text-white text-lg leading-relaxed">
+                  Nos alegra mucho que hayas completado el cuestionario. Sabemos
+                  que dirigir una empresa como
+                  <span class="empresa-resaltado text-brand-100">Amobla</span>
+                  (con 5 colaboradores y grandes planes de expansión) es
+                  retador. Con este reporte tendrás una visión clara de tus
+                  fortalezas, oportunidades y próximos pasos para crecer de
+                  manera ordenada y rentable.
+                </p>
+                <p class="text-white text-sm mt-4 italic">— Mentor Gru</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Primera fila: Hallazgos Clave y Vista previa de dimensiones -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <!-- Tarjeta Resumen de Hallazgos Clave -->
+          <div
+            class="bg-white rounded-2xl shadow-modern overflow-hidden h-full"
+          >
+            <div class="border-b border-gray-100 px-8 py-6">
+              <h3 class="text-xl font-semibold font-heading text-gray-800">
+                Resumen de Hallazgos Clave
+              </h3>
+            </div>
+            <div class="p-8">
+              <ul class="space-y-4">
+                <li class="flex items-start">
+                  <div
+                    class="bg-green-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-check text-green-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Tu negocio muestra
+                    <span class="font-semibold"
+                      >buenas prácticas en Disciplina de Ejecución</span
+                    >, especialmente en definir metas concretas a corto plazo.
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="bg-amber-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-bulb text-amber-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Hay
+                    <span class="font-semibold"
+                      >oportunidad de mejora en la comunicación interna</span
+                    >
+                    y en el
+                    <span class="font-semibold"
+                      >fortalecimiento del liderazgo</span
+                    >, para alinear mejor a tu equipo con la visión de la
+                    empresa.
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="bg-red-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-x text-red-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Aún
+                    <span class="font-semibold"
+                      >no existe un documento formal</span
+                    >
+                    que consolide la visión a mediano y largo plazo, lo cual
+                    dificulta la toma de decisiones estratégicas.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Card de Vista Previa de Dimensiones -->
+          <div
+            class="bg-white rounded-2xl shadow-modern overflow-hidden h-full"
+          >
+            <div class="border-b border-gray-100 px-8 py-6">
+              <h3 class="text-xl font-semibold font-heading text-gray-800">
+                Vista previa de dimensiones
+              </h3>
+            </div>
+            <div class="p-8">
+              <div class="mb-8">
+                <div class="flex items-center mb-2">
+                  <div class="w-3 h-3 rounded-full bg-brand-500 mr-2"></div>
+                  <span class="text-sm font-medium text-gray-700"
+                    >Claridad Estratégica</span
+                  >
+                  <span class="ml-auto text-sm font-medium text-brand-500"
+                    >42%</span
+                  >
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    class="bg-brand-500 h-2 rounded-full"
+                    style="width: 42%"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="mb-8">
+                <div class="flex items-center mb-2">
+                  <div class="w-3 h-3 rounded-full bg-indigo-600 mr-2"></div>
+                  <span class="text-sm font-medium text-gray-700"
+                    >Disciplina de Ejecución</span
+                  >
+                  <span class="ml-auto text-sm font-medium text-indigo-600"
+                    >78%</span
+                  >
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    class="bg-indigo-600 h-2 rounded-full"
+                    style="width: 78%"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="mb-8">
+                <div class="flex items-center mb-2">
+                  <div class="w-3 h-3 rounded-full bg-sky-600 mr-2"></div>
+                  <span class="text-sm font-medium text-gray-700"
+                    >Generación de Valor</span
+                  >
+                  <span class="ml-auto text-sm font-medium text-sky-600"
+                    >64%</span
+                  >
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    class="bg-sky-600 h-2 rounded-full"
+                    style="width: 64%"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <div class="flex items-center mb-2">
+                  <div class="w-3 h-3 rounded-full bg-blue-800 mr-2"></div>
+                  <span class="text-sm font-medium text-gray-700"
+                    >Liderazgo y Cultura</span
+                  >
+                  <span class="ml-auto text-sm font-medium text-blue-800"
+                    >53%</span
+                  >
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    class="bg-blue-800 h-2 rounded-full"
+                    style="width: 53%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Segunda fila: Lo que encontrarás en este reporte -->
+        <div class="bg-white rounded-2xl shadow-modern overflow-hidden mb-8">
+          <div class="border-b border-gray-100 px-8 py-6">
+            <h3 class="text-xl font-semibold font-heading text-gray-800">
+              Lo que encontrarás en este reporte
+            </h3>
+          </div>
+          <div class="p-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <!-- Item 1 -->
+              <div
+                class="bg-brand-50 rounded-xl p-6 transition-all duration-300 hover:shadow-md hover:translate-y-[-3px] card-border"
+              >
+                <div
+                  class="bg-white w-12 h-12 rounded-full flex items-center justify-center shadow-md mb-4 text-brand-500"
+                >
+                  <i class="bx bx-radar text-2xl"></i>
+                </div>
+                <h4
+                  class="text-lg font-semibold font-heading text-gray-800 mb-3"
+                >
+                  Resultados por Dimensión
+                </h4>
+                <p class="text-gray-600">
+                  Un vistazo rápido a tus resultados en cuatro dimensiones
+                  clave:
+                  <span class="font-medium"
+                    >Claridad Estratégica, Ejecución, Generación de Valor y
+                    Liderazgo/Cultura</span
+                  >.
+                </p>
+              </div>
+
+              <!-- Item 2 -->
+              <div
+                class="bg-brand-50 rounded-xl p-6 transition-all duration-300 hover:shadow-md hover:translate-y-[-3px] card-border"
+              >
+                <div
+                  class="bg-white w-12 h-12 rounded-full flex items-center justify-center shadow-md mb-4 text-brand-500"
+                >
+                  <i class="bx bx-trending-up text-2xl"></i>
+                </div>
+                <h4
+                  class="text-lg font-semibold font-heading text-gray-800 mb-3"
+                >
+                  Tendencias y Oportunidades
+                </h4>
+                <p class="text-gray-600">
+                  Una breve investigación de
+                  <span class="font-medium">tendencias y oportunidades</span>
+                  relevantes a tu sector de muebles en madera.
+                </p>
+              </div>
+
+              <!-- Item 3 -->
+              <div
+                class="bg-brand-50 rounded-xl p-6 transition-all duration-300 hover:shadow-md hover:translate-y-[-3px] card-border"
+              >
+                <div
+                  class="bg-white w-12 h-12 rounded-full flex items-center justify-center shadow-md mb-4 text-brand-500"
+                >
+                  <i class="bx bx-bulb text-2xl"></i>
+                </div>
+                <h4
+                  class="text-lg font-semibold font-heading text-gray-800 mb-3"
+                >
+                  Sugerencias de Expertos
+                </h4>
+                <p class="text-gray-600">
+                  <span class="font-medium"
+                    >Sugerencias de nuestros Expertos IA</span
+                  >
+                  para guiarte en marketing, estrategia e innovación.
+                </p>
+              </div>
+
+              <!-- Item 4 -->
+              <div
+                class="bg-brand-50 rounded-xl p-6 transition-all duration-300 hover:shadow-md hover:translate-y-[-3px] card-border"
+              >
+                <div
+                  class="bg-white w-12 h-12 rounded-full flex items-center justify-center shadow-md mb-4 text-brand-500"
+                >
+                  <i class="bx bx-task text-2xl"></i>
+                </div>
+                <h4
+                  class="text-lg font-semibold font-heading text-gray-800 mb-3"
+                >
+                  Mini-Plan de Acción
+                </h4>
+                <p class="text-gray-600">
+                  Un <span class="font-medium">mini-plan de acción</span> con
+                  pasos concretos para impulsar tu negocio.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-4">
+        <!-- Encabezado de la sección -->
+        <div
+          class="relative trumentor-pattern text-white rounded-2xl shadow-modern overflow-hidden mb-10"
+        >
+          <div class="px-10 py-12 relative z-10">
+            <h2
+              class="text-3xl md:text-4xl font-bold font-heading mb-4 text-center"
+            >
+              Tu Radiografía Estratégica
+            </h2>
+          </div>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+          <!-- Columna izquierda: Texto explicativo -->
+          <div class="lg:col-span-5">
+            <div
+              class="bg-white rounded-2xl shadow-modern overflow-hidden h-full"
+            >
+              <div class="border-b border-gray-100 px-8 py-6">
+                <h3 class="text-xl font-semibold font-heading text-gray-800">
+                  Sobre las Dimensiones Evaluadas
+                </h3>
+              </div>
+              <div class="p-8">
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                  Hemos evaluado tu empresa
+                  <span class="empresa-resaltado">Amobla</span> en cuatro
+                  dimensiones críticas:
+                  <span class="font-semibold">Claridad Estratégica</span>,
+                  <span class="font-semibold">Disciplina de Ejecución</span>,
+                  <span class="font-semibold">Generación de Valor</span> y
+                  <span class="font-semibold">Liderazgo/Cultura</span>.
+                </p>
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                  Estos porcentajes reflejan la coherencia entre tus prácticas
+                  actuales y los principios de planeación y gestión más
+                  efectivos. Cuanto más alto sea el valor, más sólida está esa
+                  área.
+                </p>
+                <div class="bg-brand-50 rounded-xl p-6 mb-6 flex">
+                  <div class="mr-4 flex-shrink-0 hidden sm:block">
+                    <div
+                      class="bg-white w-12 h-12 rounded-full flex items-center justify-center shadow-md text-brand-500"
+                    >
+                      <span class="text-xl font-bold font-heading">G</span>
+                    </div>
+                  </div>
+                  <div>
+                    <h4
+                      class="text-lg font-semibold font-heading text-gray-800 mb-3"
+                    >
+                      Mensaje del Mentor Gru
+                    </h4>
+                    <p class="text-gray-700 mb-3">
+                      <span class="empresa-resaltado">Amobla</span> tiene una
+                      <span class="font-semibold"
+                        >Capacidad Estratégica Global del 59%</span
+                      >. En términos prácticos, tienes una base sólida en
+                      ejecución operativa, pero necesitas fortalecer la
+                      planificación y alineación estratégica.
+                    </p>
+                    <p class="text-gray-700">
+                      Tu fortaleza en
+                      <span class="font-semibold text-indigo-600"
+                        >Disciplina de Ejecución (78%)</span
+                      >
+                      muestra que saben implementar y dar seguimiento a tareas,
+                      pero la baja
+                      <span class="font-semibold text-brand-500"
+                        >Claridad Estratégica (42%)</span
+                      >
+                      indica que están trabajando sin un norte completamente
+                      definido. Esto es común en empresas en crecimiento - ¡y
+                      tenemos un plan para mejorarlo!
+                    </p>
+                  </div>
+                </div>
+                <p class="text-sm text-gray-500 italic">
+                  La interpretación detallada de cada dimensión vendrá más
+                  adelante, en la sección de "Análisis Detallado".
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna derecha: Radar Chart -->
+          <div class="lg:col-span-7">
+            <div
+              class="bg-white rounded-2xl shadow-modern overflow-hidden h-full"
+            >
+              <div class="border-b border-gray-100 px-8 py-6">
+                <h3 class="text-xl font-semibold font-heading text-gray-800">
+                  Resultados por Dimensión
+                </h3>
+              </div>
+              <div class="p-8">
+                <div class="flex flex-col items-center">
+                  <!-- Indicador de capacidad estratégica global -->
+                  <div
+                    class="bg-gray-50 rounded-xl p-4 mb-6 text-center w-full"
+                  >
+                    <p class="text-base text-gray-600 mb-1">
+                      Capacidad Estratégica Global
+                    </p>
+                    <div class="text-3xl font-bold text-brand-900 mb-2">
+                      59%
+                    </div>
+                  </div>
+
+                  <!-- Espacio para el radar chart -->
+                  <div class="w-full max-w-lg aspect-square">
+                    <canvas id="radarChart"></canvas>
+                  </div>
+
+                  <!-- Leyenda del radar chart -->
+                  <div
+                    class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 w-full"
+                  >
+                    <div class="flex items-center">
+                      <div class="w-3 h-3 rounded-full bg-brand-500 mr-2"></div>
+                      <div>
+                        <div class="text-sm font-medium text-gray-700">
+                          Claridad Estratégica
+                        </div>
+                        <div class="text-lg font-semibold text-brand-500">
+                          42%
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center">
+                      <div
+                        class="w-3 h-3 rounded-full bg-indigo-600 mr-2"
+                      ></div>
+                      <div>
+                        <div class="text-sm font-medium text-gray-700">
+                          Disciplina de Ejecución
+                        </div>
+                        <div class="text-lg font-semibold text-indigo-600">
+                          78%
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center">
+                      <div class="w-3 h-3 rounded-full bg-sky-600 mr-2"></div>
+                      <div>
+                        <div class="text-sm font-medium text-gray-700">
+                          Generación de Valor
+                        </div>
+                        <div class="text-lg font-semibold text-sky-600">
+                          64%
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center">
+                      <div class="w-3 h-3 rounded-full bg-blue-800 mr-2"></div>
+                      <div>
+                        <div class="text-sm font-medium text-gray-700">
+                          Liderazgo y Cultura
+                        </div>
+                        <div class="text-lg font-semibold text-blue-800">
+                          53%
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-4">
+        <!-- Encabezado de la dimensión -->
+        <div class="flex justify-between items-center mb-6">
+          <div class="flex items-center">
+            <div
+              class="bg-brand-500 w-12 h-12 rounded-full flex items-center justify-center shadow-md mr-3 text-white"
+            >
+              <i class="bx bx-map-alt text-2xl"></i>
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold font-heading text-gray-800">
+                Dimensión 1: Claridad Estratégica
+              </h2>
+              <div class="flex items-center">
+                <span class="text-xl font-semibold text-brand-500 mr-3"
+                  >42%</span
+                >
+                <span class="text-sm text-gray-500 italic"
+                  >Nivel Básico, con oportunidades significativas de
+                  mejora</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="w-32 hidden md:block">
+            <div class="bg-gray-200 rounded-full h-4">
+              <div
+                class="bg-brand-500 h-4 rounded-full"
+                style="width: 42%"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Primera fila de 3 cards -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <!-- Card 1: ¿Qué evalúa esta dimensión? -->
+          <div
+            class="relative claridad-pattern text-white rounded-2xl shadow-modern overflow-hidden h-full"
+          >
+            <div class="px-8 py-8 relative z-10 h-full">
+              <h3 class="text-xl font-semibold font-heading mb-6">
+                ¿Qué evalúa esta dimensión?
+              </h3>
+
+              <div
+                class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 border border-white border-opacity-20"
+              >
+                <ul class="space-y-4">
+                  <li class="flex items-start">
+                    <i
+                      class="bx bx-check-circle text-white text-xl mr-3 mt-0.5"
+                    ></i>
+                    <p class="text-white">
+                      Qué tan definida está la
+                      <span class="font-semibold">visión</span> y el
+                      <span class="font-semibold">modelo de negocio</span>.
+                    </p>
+                  </li>
+                  <li class="flex items-start">
+                    <i
+                      class="bx bx-check-circle text-white text-xl mr-3 mt-0.5"
+                    ></i>
+                    <p class="text-white">
+                      Si el equipo comprende hacia dónde se dirige la empresa y
+                      por qué.
+                    </p>
+                  </li>
+                  <li class="flex items-start">
+                    <i
+                      class="bx bx-check-circle text-white text-xl mr-3 mt-0.5"
+                    ></i>
+                    <p class="text-white">
+                      El uso de datos de mercado para tomar decisiones
+                      informadas.
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Fortalezas Identificadas -->
+          <div
+            class="bg-white rounded-2xl shadow-modern overflow-hidden h-full"
+          >
+            <div class="border-b border-gray-100 px-8 py-6">
+              <h3 class="text-xl font-semibold font-heading text-gray-800">
+                Fortalezas Identificadas
+              </h3>
+            </div>
+            <div class="p-8">
+              <ul class="space-y-4">
+                <li class="flex items-start">
+                  <div
+                    class="bg-green-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-check text-green-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Reconoces que el mercado de muebles de madera tiene
+                    potencial y buscas aprovechar tendencias de diseño e
+                    innovación.
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="bg-green-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-check text-green-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Tienes ideas claras de lo que deseas a corto plazo (por
+                    ejemplo, aumentar tus ventas y llegar a clientes
+                    corporativos).
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Card 3: Oportunidades de Mejora -->
+          <div
+            class="bg-white rounded-2xl shadow-modern overflow-hidden h-full"
+          >
+            <div class="border-b border-gray-100 px-8 py-6">
+              <h3 class="text-xl font-semibold font-heading text-gray-800">
+                Oportunidades de Mejora
+              </h3>
+            </div>
+            <div class="p-8">
+              <ul class="space-y-4">
+                <li class="flex items-start">
+                  <div
+                    class="bg-red-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-x text-red-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    <span class="font-semibold">Documentar y compartir</span> la
+                    visión y objetivos de mediano y largo plazo con tu equipo.
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="bg-amber-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-bell text-amber-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Integrar más estudios de mercado y retroalimentación de
+                    clientes para afinar y robustecer tu estrategia.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección de recomendaciones de expertos -->
+        <div class="mb-4">
+          <h3 class="text-xl font-semibold font-heading text-gray-800 mb-3">
+            Recomendaciones de expertos de TruMentor
+          </h3>
+        </div>
+
+        <!-- Grid de expertos en 2 filas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+          <!-- Experto 1: Mentor Gru -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="logo-bg w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >G</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Mentor Gru
+                  </h4>
+                  <span class="text-gray-500 text-xs"
+                    >Consultor Estratégico IA</span
+                  >
+                </div>
+                <div class="text-sm text-gray-700">
+                  "Veo que cuentas con ideas valiosas y una gran pasión por tu
+                  negocio. Para que toda tu gente camine en la misma dirección,
+                  es fundamental que esa visión esté por escrito y se comparta
+                  con claridad. Así cada colaborador entenderá cómo contribuir a
+                  que <span class="empresa-resaltado">Amobla</span> crezca de
+                  forma ordenada."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experto 2: Experto en Marketing -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="bg-purple-500 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >M</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Carla Jiménez
+                  </h4>
+                  <span class="text-gray-500 text-xs"
+                    >Especialista en Marketing IA</span
+                  >
+                </div>
+                <div class="text-sm text-gray-700">
+                  "Para mejorar la claridad estratégica de
+                  <span class="empresa-resaltado">Amobla</span>, recomendaría
+                  definir muy bien tu cliente ideal y tu propuesta de valor
+                  única. ¿Qué te diferencia realmente de otras opciones? Cuando
+                  tengas eso claro, toda tu comunicación será más coherente y
+                  poderosa."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experto 3: Experto en Liderazgo -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="bg-amber-500 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >L</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Ricardo Méndez
+                  </h4>
+                  <span class="text-gray-500 text-xs"
+                    >Coach de Liderazgo IA</span
+                  >
+                </div>
+                <div class="text-sm text-gray-700">
+                  "Tu rol como líder es ser el guardián de la visión. Programa
+                  reuniones trimestrales específicamente para hablar de avances
+                  estratégicos, no solo de operaciones diarias. Así tu equipo
+                  entenderá que la visión a largo plazo es tan importante como
+                  las tareas inmediatas."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experto 4: Experto en Estrategia -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="bg-green-600 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >E</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Laura Vega
+                  </h4>
+                  <span class="text-gray-500 text-xs"
+                    >Consultora de PyMEs IA</span
+                  >
+                </div>
+                <div class="text-sm text-gray-700">
+                  "Crea un documento de 'Visión Estratégica' simple pero
+                  poderoso: ¿Dónde quieres que esté
+                  <span class="empresa-resaltado">Amobla</span> en 3 años? ¿Qué
+                  mercados? ¿Qué clientes? Define 3-5 objetivos medibles y haz
+                  que todo tu equipo los entienda. La claridad genera
+                  alineación."
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-4">
+        <!-- Encabezado de la dimensión -->
+        <div class="flex justify-between items-center mb-6">
+          <div class="flex items-center">
+            <div
+              class="bg-indigo-600 w-12 h-12 rounded-full flex items-center justify-center shadow-md mr-3 text-white"
+            >
+              <i class="bx bx-target-lock text-2xl"></i>
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold font-heading text-gray-800">
+                Dimensión 2: Disciplina de Ejecución
+              </h2>
+              <div class="flex items-center">
+                <span class="text-xl font-semibold text-indigo-600 mr-3"
+                  >78%</span
+                >
+                <span class="text-sm text-gray-500 italic"
+                  >Nivel Intermedio/Avanzado: tu mejor dimensión</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="w-32 hidden md:block">
+            <div class="bg-gray-200 rounded-full h-4">
+              <div
+                class="bg-indigo-600 h-4 rounded-full"
+                style="width: 78%"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Primera fila de 3 cards -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <!-- Card 1: ¿Qué evalúa esta dimensión? -->
+          <div
+            class="relative ejecucion-pattern text-white rounded-2xl shadow-modern overflow-hidden h-full"
+          >
+            <div class="px-8 py-8 relative z-10 h-full">
+              <h3 class="text-xl font-semibold font-heading mb-6">
+                ¿Qué evalúa esta dimensión?
+              </h3>
+
+              <div
+                class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 border border-white border-opacity-20"
+              >
+                <ul class="space-y-4">
+                  <li class="flex items-start">
+                    <i
+                      class="bx bx-check-circle text-white text-xl mr-3 mt-0.5"
+                    ></i>
+                    <p class="text-white">
+                      La capacidad de convertir objetivos en
+                      <span class="font-semibold"
+                        >planes de acción concretos</span
+                      >.
+                    </p>
+                  </li>
+                  <li class="flex items-start">
+                    <i
+                      class="bx bx-check-circle text-white text-xl mr-3 mt-0.5"
+                    ></i>
+                    <p class="text-white">
+                      El seguimiento periódico de los avances (revisiones
+                      mensuales/trimestrales).
+                    </p>
+                  </li>
+                  <li class="flex items-start">
+                    <i
+                      class="bx bx-check-circle text-white text-xl mr-3 mt-0.5"
+                    ></i>
+                    <p class="text-white">
+                      El uso de herramientas que permitan visualizar metas y
+                      resultados.
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Fortalezas Identificadas -->
+          <div
+            class="bg-white rounded-2xl shadow-modern overflow-hidden h-full"
+          >
+            <div class="border-b border-gray-100 px-8 py-6">
+              <h3 class="text-xl font-semibold font-heading text-gray-800">
+                Fortalezas Identificadas
+              </h3>
+            </div>
+            <div class="p-8">
+              <ul class="space-y-4">
+                <li class="flex items-start">
+                  <div
+                    class="bg-green-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-check text-green-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Estableces metas a corto plazo y realizas
+                    <span class="font-semibold">revisiones constantes</span>
+                    para mantener el foco.
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="bg-green-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-check text-green-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Utilizas herramientas digitales (Excel o software sencillo)
+                    para dar seguimiento a indicadores.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Card 3: Oportunidades de Mejora -->
+          <div
+            class="bg-white rounded-2xl shadow-modern overflow-hidden h-full"
+          >
+            <div class="border-b border-gray-100 px-8 py-6">
+              <h3 class="text-xl font-semibold font-heading text-gray-800">
+                Oportunidades de Mejora
+              </h3>
+            </div>
+            <div class="p-8">
+              <ul class="space-y-4">
+                <li class="flex items-start">
+                  <div
+                    class="bg-amber-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-bell text-amber-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Migrar hacia un
+                    <span class="font-semibold">tablero compartido</span> más
+                    robusto para que todos vean el progreso en tiempo real.
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="bg-amber-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-bell text-amber-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Estructurar mejor las reuniones de retroalimentación,
+                    definiendo responsabilidades claras para cada meta.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección de recomendaciones de expertos -->
+        <div class="mb-4">
+          <h3 class="text-xl font-semibold font-heading text-gray-800 mb-3">
+            Recomendaciones de expertos de TruMentor
+          </h3>
+        </div>
+
+        <!-- Grid de expertos en 2 filas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+          <!-- Experto 1: Mentor Gru -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="logo-bg w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >G</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Mentor Gru
+                  </h4>
+                  <span class="text-gray-500 text-xs"
+                    >Consultor Estratégico IA</span
+                  >
+                </div>
+                <div class="text-sm text-gray-700">
+                  "Excelente trabajo poniendo metas y revisándolas con
+                  frecuencia. Mi consejo es que des un paso más y adoptes una
+                  solución colaborativa, donde tu equipo también pueda
+                  visualizar y actualizar los avances. Mantener esa disciplina y
+                  organización te permitirá aprovechar el impulso y planificar
+                  el crecimiento con mayor eficacia."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experto 2: Experto en Operaciones -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="bg-yellow-600 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >O</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Miguel Torres
+                  </h4>
+                  <span class="text-gray-500 text-xs"
+                    >Especialista en Operaciones IA</span
+                  >
+                </div>
+                <div class="text-sm text-gray-700">
+                  "Tu habilidad para mantener el seguimiento es clave. Te
+                  sugiero implementar un sistema de 'Daily Standups' de 15
+                  minutos donde cada miembro del equipo comparta: ¿Qué logró
+                  ayer? ¿Qué hará hoy? ¿Qué obstáculos enfrenta? Esto mantendrá
+                  a todos alineados sin sacrificar tiempo productivo en
+                  <span class="empresa-resaltado">Amobla</span>."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experto 3: Experto en Finanzas -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="bg-green-700 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >F</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Ana Martínez
+                  </h4>
+                  <span class="text-gray-500 text-xs"
+                    >Consultora Financiera IA</span
+                  >
+                </div>
+                <div class="text-sm text-gray-700">
+                  "Tu disciplina de ejecución es impresionante. Aprovecha esta
+                  fortaleza conectando tus metas operativas con indicadores
+                  financieros clave para
+                  <span class="empresa-resaltado">Amobla</span>. Determina qué
+                  métricas impactan directamente en tu flujo de caja y margen.
+                  Así cada acción tendrá un propósito económico claro,
+                  facilitando decisiones de inversión en crecimiento."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experto 4: Experto en OKRs -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="bg-indigo-800 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >K</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Diego Ramírez
+                  </h4>
+                  <span class="text-gray-500 text-xs"
+                    >Especialista en OKRs IA</span
+                  >
+                </div>
+                <div class="text-sm text-gray-700">
+                  "Con tu base sólida, es momento de adoptar OKRs (Objetivos y
+                  Resultados Clave): define 3-5 objetivos ambiciosos
+                  trimestrales y para cada uno, 2-3 resultados clave medibles.
+                  Lo que funciona bien en
+                  <span class="empresa-resaltado">Amobla</span> es separar los
+                  OKRs estratégicos (innovación, nuevos mercados) de los
+                  operativos (eficiencia, productividad). ¡Simple pero
+                  poderoso!"
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container mx-auto px-4">
+        <!-- Encabezado de la dimensión -->
+        <div class="flex justify-between items-center mb-6">
+          <div class="flex items-center">
+            <div
+              class="bg-sky-600 w-12 h-12 rounded-full flex items-center justify-center shadow-md mr-3 text-white"
+            >
+              <i class="bx bx-line-chart text-2xl"></i>
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold font-heading text-gray-800">
+                Dimensión 3: Generación de Valor
+              </h2>
+              <div class="flex items-center">
+                <span class="text-xl font-semibold text-sky-600 mr-3">64%</span>
+                <span class="text-sm text-gray-500 italic"
+                  >Nivel Intermedio</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="w-32 hidden md:block">
+            <div class="bg-gray-200 rounded-full h-4">
+              <div class="bg-sky-600 h-4 rounded-full" style="width: 64%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Primera fila de 3 cards -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <!-- Card 1: ¿Qué evalúa esta dimensión? -->
+          <div
+            class="relative valor-pattern text-white rounded-2xl shadow-modern overflow-hidden h-full"
+          >
+            <div class="px-8 py-8 relative z-10 h-full">
+              <h3 class="text-xl font-semibold font-heading mb-6">
+                ¿Qué evalúa esta dimensión?
+              </h3>
+
+              <div
+                class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 border border-white border-opacity-20"
+              >
+                <ul class="space-y-4">
+                  <li class="flex items-start">
+                    <i
+                      class="bx bx-check-circle text-white text-xl mr-3 mt-0.5"
+                    ></i>
+                    <p class="text-white">
+                      Tu capacidad de desarrollar productos/servicios que
+                      respondan a las
+                      <span class="font-semibold">necesidades reales</span> de
+                      tus clientes.
+                    </p>
+                  </li>
+                  <li class="flex items-start">
+                    <i
+                      class="bx bx-check-circle text-white text-xl mr-3 mt-0.5"
+                    ></i>
+                    <p class="text-white">
+                      La alineación de tus recursos y esfuerzos hacia
+                      actividades que generen
+                      <span class="font-semibold">beneficios diferenciados</span
+                      >.
+                    </p>
+                  </li>
+                  <li class="flex items-start">
+                    <i
+                      class="bx bx-check-circle text-white text-xl mr-3 mt-0.5"
+                    ></i>
+                    <p class="text-white">
+                      La actitud hacia la
+                      <span class="font-semibold">innovación</span> y la
+                      adaptación continua del modelo de negocio.
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Fortalezas Identificadas -->
+          <div
+            class="bg-white rounded-2xl shadow-modern overflow-hidden h-full"
+          >
+            <div class="border-b border-gray-100 px-8 py-6">
+              <h3 class="text-xl font-semibold font-heading text-gray-800">
+                Fortalezas Identificadas
+              </h3>
+            </div>
+            <div class="p-8">
+              <ul class="space-y-4">
+                <li class="flex items-start">
+                  <div
+                    class="bg-green-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-check text-green-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Tu oferta (muebles de madera) es atractiva por su calidad y
+                    posibilidad de personalización.
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="bg-green-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-check text-green-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Muestras disposición para adoptar nuevas tendencias, como la
+                    venta online.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Card 3: Oportunidades de Mejora -->
+          <div
+            class="bg-white rounded-2xl shadow-modern overflow-hidden h-full"
+          >
+            <div class="border-b border-gray-100 px-8 py-6">
+              <h3 class="text-xl font-semibold font-heading text-gray-800">
+                Oportunidades de Mejora
+              </h3>
+            </div>
+            <div class="p-8">
+              <ul class="space-y-4">
+                <li class="flex items-start">
+                  <div
+                    class="bg-amber-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-bell text-amber-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Explorar
+                    <span class="font-semibold">alianzas estratégicas</span> con
+                    otras empresas para ampliar tu alcance, por ejemplo tiendas
+                    de decoración o diseñadores de interiores.
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="bg-amber-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-bell text-amber-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Definir claramente la
+                    <span class="font-semibold">propuesta de valor única</span>
+                    que distinga a tus productos de la competencia.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección de recomendaciones de expertos -->
+        <div class="mb-4">
+          <h3 class="text-xl font-semibold font-heading text-gray-800 mb-3">
+            Recomendaciones de expertos de TruMentor
+          </h3>
+        </div>
+
+        <!-- Grid de expertos en 2 filas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+          <!-- Experto 1: Mentor Gru -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="logo-bg w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >G</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Mentor Gru
+                  </h4>
+                  <span class="text-gray-500 text-xs"
+                    >Consultor Estratégico IA</span
+                  >
+                </div>
+                <div class="text-sm text-gray-700">
+                  "Tu producto tiene un gran atractivo para quienes buscan
+                  calidad y detalles únicos. Enfócate en reforzar esa diferencia
+                  que te hace especial y busca el modo de dar a conocer ese
+                  valor. A veces, un pequeño ajuste o colaboración puede marcar
+                  una gran diferencia para tus clientes."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experto 2: Experto en Marketing -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="bg-purple-500 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >M</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Patricia Rojas
+                  </h4>
+                  <span class="text-gray-500 text-xs"
+                    >Especialista en Marketing IA</span
+                  >
+                </div>
+                <div class="text-sm text-gray-700">
+                  "Recomiendo que desarrolles una 'historia' detrás de cada
+                  pieza que crea <span class="empresa-resaltado">Amobla</span>.
+                  El cliente actual no solo compra un mueble, sino una narrativa
+                  sobre su origen, materiales sostenibles y el artesano que lo
+                  elaboró. Documenta el proceso con fotos/videos y compártelo en
+                  redes. El storytelling multiplica el valor percibido sin
+                  aumentar costos."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experto 3: Experto en Experiencias -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="bg-teal-600 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >E</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Javier Soto
+                  </h4>
+                  <span class="text-gray-500 text-xs">Experto en UX/CX IA</span>
+                </div>
+                <div class="text-sm text-gray-700">
+                  "La personalización que ofreces es tu tesoro. Considera crear
+                  una herramienta digital interactiva que permita a los clientes
+                  diseñar virtualmente su mueble, eligiendo maderas, acabados y
+                  detalles. Incluso algo simple mejorará drásticamente la
+                  experiencia del cliente con
+                  <span class="empresa-resaltado">Amobla</span> y reducirá la
+                  incertidumbre en su decisión de compra."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experto 4: Experto en Generación de Valor -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="bg-sky-800 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >V</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Natalia Vega
+                  </h4>
+                  <span class="text-gray-500 text-xs"
+                    >Consultora de Valor IA</span
+                  >
+                </div>
+                <div class="text-sm text-gray-700">
+                  "Identifica 2-3 segmentos específicos donde tus muebles
+                  resuelvan problemas concretos: espacios pequeños, hogares con
+                  mascotas o nichos profesionales como consultorios o estudios.
+                  Las alianzas son clave: busca diseñadores emergentes que
+                  necesiten fabricantes de calidad como
+                  <span class="empresa-resaltado">Amobla</span>. El valor se
+                  multiplica cuando resolves necesidades específicas."
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container mx-auto px-4">
+        <!-- Encabezado de la dimensión -->
+        <div class="flex justify-between items-center mb-6">
+          <div class="flex items-center">
+            <div
+              class="bg-blue-800 w-12 h-12 rounded-full flex items-center justify-center shadow-md mr-3 text-white"
+            >
+              <i class="bx bx-group text-2xl"></i>
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold font-heading text-gray-800">
+                Dimensión 4: Liderazgo y Cultura
+              </h2>
+              <div class="flex items-center">
+                <span class="text-xl font-semibold text-blue-800 mr-3"
+                  >53%</span
+                >
+                <span class="text-sm text-gray-500 italic"
+                  >Nivel Básico/Intermedio</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="w-32 hidden md:block">
+            <div class="bg-gray-200 rounded-full h-4">
+              <div
+                class="bg-blue-800 h-4 rounded-full"
+                style="width: 53%"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Primera fila de 3 cards -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <!-- Card 1: ¿Qué evalúa esta dimensión? -->
+          <div
+            class="relative liderazgo-pattern text-white rounded-2xl shadow-modern overflow-hidden h-full"
+          >
+            <div class="px-8 py-8 relative z-10 h-full">
+              <h3 class="text-xl font-semibold font-heading mb-6">
+                ¿Qué evalúa esta dimensión?
+              </h3>
+
+              <div
+                class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 border border-white border-opacity-20"
+              >
+                <ul class="space-y-4">
+                  <li class="flex items-start">
+                    <i
+                      class="bx bx-check-circle text-white text-xl mr-3 mt-0.5"
+                    ></i>
+                    <p class="text-white">
+                      El <span class="font-semibold">estilo de liderazgo</span>:
+                      comunicación abierta, trabajo en equipo y motivación.
+                    </p>
+                  </li>
+                  <li class="flex items-start">
+                    <i
+                      class="bx bx-check-circle text-white text-xl mr-3 mt-0.5"
+                    ></i>
+                    <p class="text-white">
+                      Los valores que conforman la
+                      <span class="font-semibold">cultura interna</span>:
+                      colaboración, agilidad ante el cambio.
+                    </p>
+                  </li>
+                  <li class="flex items-start">
+                    <i
+                      class="bx bx-check-circle text-white text-xl mr-3 mt-0.5"
+                    ></i>
+                    <p class="text-white">
+                      La capacidad de los líderes para
+                      <span class="font-semibold">alinear</span> el día a día
+                      con la estrategia a largo plazo.
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Fortalezas Identificadas -->
+          <div
+            class="bg-white rounded-2xl shadow-modern overflow-hidden h-full"
+          >
+            <div class="border-b border-gray-100 px-8 py-6">
+              <h3 class="text-xl font-semibold font-heading text-gray-800">
+                Fortalezas Identificadas
+              </h3>
+            </div>
+            <div class="p-8">
+              <ul class="space-y-4">
+                <li class="flex items-start">
+                  <div
+                    class="bg-green-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-check text-green-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Tus colaboradores reconocen tu pasión y suelen apoyarte ante
+                    retos o proyectos urgentes.
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="bg-green-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-check text-green-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Estás abierta a nuevas ideas y das espacio a tu equipo para
+                    plantear propuestas de mejora.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Card 3: Oportunidades de Mejora -->
+          <div
+            class="bg-white rounded-2xl shadow-modern overflow-hidden h-full"
+          >
+            <div class="border-b border-gray-100 px-8 py-6">
+              <h3 class="text-xl font-semibold font-heading text-gray-800">
+                Oportunidades de Mejora
+              </h3>
+            </div>
+            <div class="p-8">
+              <ul class="space-y-4">
+                <li class="flex items-start">
+                  <div
+                    class="bg-amber-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-bell text-amber-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Formalizar y socializar
+                    <span class="font-semibold">valores y objetivos</span> que
+                    unan a todos en una misma dirección.
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="bg-amber-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0"
+                  >
+                    <i class="bx bx-bell text-amber-600 text-xl"></i>
+                  </div>
+                  <p class="text-gray-700">
+                    Promover espacios de
+                    <span class="font-semibold"
+                      >formación y retroalimentación</span
+                    >
+                    con mayor regularidad.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección de recomendaciones de expertos -->
+        <div class="mb-4">
+          <h3 class="text-xl font-semibold font-heading text-gray-800 mb-3">
+            Recomendaciones de expertos de TruMentor
+          </h3>
+        </div>
+
+        <!-- Grid de expertos en 2 filas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+          <!-- Experto 1: Mentor Gru -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="logo-bg w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >G</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Mentor Gru
+                  </h4>
+                  <span class="text-gray-500 text-xs"
+                    >Consultor Estratégico IA</span
+                  >
+                </div>
+                <div class="text-sm text-gray-700">
+                  "Un equipo verdaderamente unido necesita una visión compartida
+                  y oportunidades para expresarse. Comparte con claridad tus
+                  valores y metas, y dedica momentos puntuales a escuchar y
+                  formar a tu gente. Esa cultura de liderazgo cercano creará los
+                  cimientos de un crecimiento sostenible."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experto 2: Experto en Liderazgo -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="bg-blue-600 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >L</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Carlos Navarro
+                  </h4>
+                  <span class="text-gray-500 text-xs"
+                    >Coach de Liderazgo IA</span
+                  >
+                </div>
+                <div class="text-sm text-gray-700">
+                  "Te recomiendo implementar un 'Manifiesto
+                  <span class="empresa-resaltado">Amobla</span>': un documento
+                  breve (1-2 páginas) con visión, misión, valores y
+                  comportamientos esperados. No lo hagas sola: involucra a tu
+                  equipo en su creación mediante una sesión dinámica. Al
+                  participar en construirlo, el compromiso será mucho mayor y te
+                  sorprenderá lo que aprenderás de ellos."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experto 3: Experto en Trabajo en Equipo -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="bg-cyan-600 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >T</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Marina López
+                  </h4>
+                  <span class="text-gray-500 text-xs"
+                    >Especialista en Equipos IA</span
+                  >
+                </div>
+                <div class="text-sm text-gray-700">
+                  "Tu apertura a nuevas ideas es una gran fortaleza. Sugiéro
+                  implementar 'Viernes de Innovación': dedica 2 horas cada mes
+                  donde el equipo proponga mejoras para
+                  <span class="empresa-resaltado">Amobla</span>. Fija reglas:
+                  una idea debe identificar un problema, su solución y beneficio
+                  esperado. Otorga recursos para implementar una propuesta
+                  mensualmente, ¡por votación! Esto fomenta pensamiento
+                  crítico."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experto 4: Experto en Endomarketing -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-start">
+              <div
+                class="bg-fuchsia-600 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3"
+              >
+                <span class="text-white text-base font-bold font-heading"
+                  >E</span
+                >
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <h4 class="font-semibold text-gray-900 mr-2 text-sm">
+                    Roberto García
+                  </h4>
+                  <span class="text-gray-500 text-xs"
+                    >Consultor de Endomarketing IA</span
+                  >
+                </div>
+                <div class="text-sm text-gray-700">
+                  "Los colaboradores necesitan sentirse parte de algo mayor.
+                  Crea un sistema de reconocimiento vinculado a los valores de
+                  <span class="empresa-resaltado">Amobla</span>. Por ejemplo,
+                  'Premios Artesano del Trimestre' donde se reconozca la
+                  calidad, creatividad y compromiso. El premio puede ser
+                  simbólico pero público. Incluye historias de éxito y
+                  aprendizajes en un boletín mensual simple (incluso por
+                  WhatsApp)."
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-md py-6">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="flex items-center mb-4 md:mb-0">
+            <div
+              class="logo-bg w-8 h-8 rounded-full flex items-center justify-center shadow-sm mr-2"
+            >
+              <span class="text-white text-sm font-heading font-bold">T</span>
+            </div>
+            <span class="text-sm text-gray-600"
+              >© 2025 TruMentor. Todos los derechos reservados.</span
+            >
+          </div>
+          <div class="flex space-x-4 text-sm">
+            <a
+              href="#"
+              class="text-gray-500 hover:text-brand-500 transition-colors"
+              >Ayuda</a
+            >
+            <a
+              href="#"
+              class="text-gray-500 hover:text-brand-500 transition-colors"
+              >Privacidad</a
+            >
+            <a
+              href="#"
+              class="text-gray-500 hover:text-brand-500 transition-colors"
+              >Términos</a
+            >
+            <a
+              href="#"
+              class="text-gray-500 hover:text-brand-500 transition-colors"
+              >Contacto</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Script para el radar chart -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const ctx = document.getElementById("radarChart").getContext("2d");
+
+        // Datos del radar chart
+        const data = {
+          labels: [
+            "Claridad Estratégica",
+            "Disciplina de Ejecución",
+            "Generación de Valor",
+            "Liderazgo y Cultura",
+          ],
+          datasets: [
+            {
+              label: "Desempeño Actual",
+              data: [42, 78, 64, 53],
+              fill: true,
+              backgroundColor: "rgba(0, 153, 255, 0.2)",
+              borderColor: "rgba(0, 153, 255, 0.8)",
+              pointBackgroundColor: [
+                "#0099ff", // Claridad Estratégica
+                "#4f46e5", // Disciplina de Ejecución
+                "#0284c7", // Generación de Valor
+                "#1e40af", // Liderazgo y Cultura
+              ],
+              pointBorderColor: "#fff",
+              pointHoverBackgroundColor: "#fff",
+              pointHoverBorderColor: "rgba(0, 153, 255, 1)",
+              borderWidth: 2,
+              pointRadius: 5,
+              pointHoverRadius: 7,
+            },
+          ],
+        };
+
+        // Configuración del radar chart
+        const config = {
+          type: "radar",
+          data: data,
+          options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+              r: {
+                angleLines: {
+                  display: true,
+                  color: "rgba(0, 0, 0, 0.1)",
+                },
+                grid: {
+                  color: "rgba(0, 0, 0, 0.1)",
+                },
+                pointLabels: {
+                  font: {
+                    family: "Inter",
+                    size: 12,
+                    weight: "600",
+                  },
+                  color: "#4b5563",
+                },
+                suggestedMin: 0,
+                suggestedMax: 100,
+                ticks: {
+                  stepSize: 20,
+                  callback: function (value) {
+                    return value + "%";
+                  },
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+              tooltip: {
+                backgroundColor: "rgba(255, 255, 255, 0.9)",
+                titleColor: "#1f2937",
+                bodyColor: "#1f2937",
+                borderColor: "rgba(0, 153, 255, 0.5)",
+                borderWidth: 1,
+                padding: 12,
+                displayColors: false,
+                callbacks: {
+                  label: function (context) {
+                    return context.raw + "%";
+                  },
+                },
+              },
+            },
+          },
+        };
+
+        // Creación del radar chart
+        const radarChart = new Chart(ctx, config);
+      });
+    </script>
+  </body>
+</html>

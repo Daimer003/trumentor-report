@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruMentor - Reporte de Diagnóstico</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Iconos de Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Chart.js para el radar chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Tailwind Config para los colores y estilos personalizados -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#e6f5ff',
+                            100: '#cceaff',
+                            200: '#99d6ff',
+                            300: '#66c1ff',
+                            400: '#33adff',
+                            500: '#0099ff',
+                            600: '#007acc',
+                            700: '#005c99',
+                            800: '#003d66',
+                            900: '#001f33'
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'heading': ['Poppins', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'modern': '0 20px 60px -15px rgba(0, 77, 128, 0.15), 0 8px 25px -10px rgba(0, 77, 128, 0.1)',
+                        'input': '0 2px 5px rgba(0, 77, 128, 0.08), 0 0 0 1px rgba(0, 77, 128, 0.05)',
+                        'button': '0 10px 25px -5px rgba(0, 153, 255, 0.25)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f0f9ff;
+        }
+
+        .progress-gradient {
+            background: linear-gradient(90deg, #0099ff, #33adff);
+        }
+        .input-focus:focus {
+            box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.2);
+            border-color: #0099ff;
+        }
+        .card-border {
+            border: 1px solid rgba(0, 153, 255, 0.1);
+        }
+        .logo-bg {
+            background-color: #0099ff;
+        }
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%230099ff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        .empresa-resaltado {
+            color: #0099ff;
+            font-weight: 600;
+        }
+        .nombre-resaltado {
+            color: #0099ff;
+            font-weight: 600;
+        }
+        
+        /* Patrón de cuadrícula para el header de TruMentor */
+        .trumentor-pattern {
+            background-color: #0099ff;
+            background-image: url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 0h50v50H0z' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1'/%3E%3Cpath d='M10 0v50M20 0v50M30 0v50M40 0v50' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1'/%3E%3Cpath d='M0 10h50M0 20h50M0 30h50M0 40h50' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans text-gray-800 relative bg-pattern">
+    <!-- Header con logo (simplificado) -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center">
+                <div class="logo-bg w-10 h-10 rounded-full flex items-center justify-center shadow-md mr-3">
+                    <span class="text-white text-xl font-heading font-bold">T</span>
+                </div>
+                <h1 class="text-2xl font-bold font-heading text-brand-500">TruMentor</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenedor principal -->
+    <main class="flex-grow pt-8 pb-16">
+       
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-md py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <div class="logo-bg w-8 h-8 rounded-full flex items-center justify-center shadow-sm mr-2">
+                        <span class="text-white text-sm font-heading font-bold">T</span>
+                    </div>
+                    <span class="text-sm text-gray-600">© 2025 TruMentor. Todos los derechos reservados.</span>
+                </div>
+                <div class="flex space-x-4 text-sm">
+                    <a href="#" class="text-gray-500 hover:text-brand-500 transition-colors">Ayuda</a>
+                    <a href="#" class="text-gray-500 hover:text-brand-500 transition-colors">Privacidad</a>
+                    <a href="#" class="text-gray-500 hover:text-brand-500 transition-colors">Términos</a>
+                    <a href="#" class="text-gray-500 hover:text-brand-500 transition-colors">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script para el radar chart -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            
+            // Datos del radar chart
+            const data = {
+                labels: [
+                    'Claridad Estratégica',
+                    'Disciplina de Ejecución',
+                    'Generación de Valor',
+                    'Liderazgo y Cultura'
+                ],
+                datasets: [{
+                    label: 'Desempeño Actual',
+                    data: [42, 78, 64, 53],
+                    fill: true,
+                    backgroundColor: 'rgba(0, 153, 255, 0.2)',
+                    borderColor: 'rgba(0, 153, 255, 0.8)',
+                    pointBackgroundColor: [
+                        '#0099ff', // Claridad Estratégica
+                        '#4f46e5', // Disciplina de Ejecución
+                        '#0284c7', // Generación de Valor
+                        '#1e40af'  // Liderazgo y Cultura
+                    ],
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(0, 153, 255, 1)',
+                    borderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                }]
+            };
+
+            // Configuración del radar chart
+            const config = {
+                type: 'radar',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true,
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            pointLabels: {
+                                font: {
+                                    family: 'Inter',
+                                    size: 12,
+                                    weight: '600'
+                                },
+                                color: '#4b5563'
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                            ticks: {
+                                stepSize: 20,
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#1f2937',
+                            bodyColor: '#1f2937',
+                            borderColor: 'rgba(0, 153, 255, 0.5)',
+                            borderWidth: 1,
+                            padding: 12,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            // Creación del radar chart
+            const radarChart = new Chart(ctx, config);
+        });
+    </script>
+</body>
+</html>

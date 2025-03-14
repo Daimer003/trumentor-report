@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruMentor - Dimensión: Disciplina de Ejecución</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Iconos de Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Tailwind Config para los colores y estilos personalizados -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#e6f5ff',
+                            100: '#cceaff',
+                            200: '#99d6ff',
+                            300: '#66c1ff',
+                            400: '#33adff',
+                            500: '#0099ff',
+                            600: '#007acc',
+                            700: '#005c99',
+                            800: '#003d66',
+                            900: '#001f33'
+                        },
+                        indigo: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81'
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'heading': ['Poppins', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'modern': '0 20px 60px -15px rgba(0, 77, 128, 0.15), 0 8px 25px -10px rgba(0, 77, 128, 0.1)',
+                        'input': '0 2px 5px rgba(0, 77, 128, 0.08), 0 0 0 1px rgba(0, 77, 128, 0.05)',
+                        'button': '0 10px 25px -5px rgba(0, 153, 255, 0.25)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f0f9ff;
+        }
+
+        .progress-gradient {
+            background: linear-gradient(90deg, #0099ff, #33adff);
+        }
+        .input-focus:focus {
+            box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.2);
+            border-color: #0099ff;
+        }
+        .card-border {
+            border: 1px solid rgba(0, 153, 255, 0.1);
+        }
+        .logo-bg {
+            background-color: #0099ff;
+        }
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%230099ff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        .empresa-resaltado {
+            color: #4f46e5;
+            font-weight: 600;
+        }
+        .nombre-resaltado {
+            color: #4f46e5;
+            font-weight: 600;
+        }
+        
+        /* Patrón específico para la dimensión de Disciplina de Ejecución - SIMPLIFICADO */
+        .ejecucion-pattern {
+            background-color: #4f46e5;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E %3C!-- Patrón de cuadrícula simple --%3E %3Crect width='100' height='100' fill='none'/%3E %3C!-- Checkboxes simples --%3E %3Crect x='10' y='10' width='10' height='10' rx='2' stroke='white' stroke-opacity='0.15' fill='none'/%3E %3Cpath d='M 12 15 L 15 18 L 19 12' stroke='white' stroke-opacity='0.2' fill='none'/%3E %3Crect x='40' y='40' width='10' height='10' rx='2' stroke='white' stroke-opacity='0.15' fill='none'/%3E %3Cpath d='M 42 45 L 45 48 L 49 42' stroke='white' stroke-opacity='0.2' fill='none'/%3E %3Crect x='70' y='70' width='10' height='10' rx='2' stroke='white' stroke-opacity='0.15' fill='none'/%3E %3Cpath d='M 72 75 L 75 78 L 79 72' stroke='white' stroke-opacity='0.2' fill='none'/%3E %3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans text-gray-800 relative bg-pattern">
+    <!-- Header con logo (simplificado) -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center">
+                <div class="logo-bg w-10 h-10 rounded-full flex items-center justify-center shadow-md mr-3">
+                    <span class="text-white text-xl font-heading font-bold">T</span>
+                </div>
+                <h1 class="text-2xl font-bold font-heading text-brand-500">TruMentor</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenedor principal -->
+    <main class="flex-grow pt-8 pb-16">
+        <div class="container mx-auto px-4">
+            <!-- Encabezado de la dimensión -->
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center">
+                    <div class="bg-indigo-600 w-12 h-12 rounded-full flex items-center justify-center shadow-md mr-3 text-white">
+                        <i class='bx bx-target-lock text-2xl'></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold font-heading text-gray-800">Dimensión 2: Disciplina de Ejecución</h2>
+                        <div class="flex items-center">
+                            <span class="text-xl font-semibold text-indigo-600 mr-3">78%</span>
+                            <span class="text-sm text-gray-500 italic">Nivel Intermedio/Avanzado: tu mejor dimensión</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-32 hidden md:block">
+                    <div class="bg-gray-200 rounded-full h-4">
+                        <div class="bg-indigo-600 h-4 rounded-full" style="width: 78%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Primera fila de 3 cards -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Card 1: ¿Qué evalúa esta dimensión? -->
+                <div class="relative ejecucion-pattern text-white rounded-2xl shadow-modern overflow-hidden h-full">
+                    <div class="px-8 py-8 relative z-10 h-full">
+                        <h3 class="text-xl font-semibold font-heading mb-6">¿Qué evalúa esta dimensión?</h3>
+                        
+                        <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 border border-white border-opacity-20">
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <i class='bx bx-check-circle text-white text-xl mr-3 mt-0.5'></i>
+                                    <p class="text-white">La capacidad de convertir objetivos en <span class="font-semibold">planes de acción concretos</span>.</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class='bx bx-check-circle text-white text-xl mr-3 mt-0.5'></i>
+                                    <p class="text-white">El seguimiento periódico de los avances (revisiones mensuales/trimestrales).</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class='bx bx-check-circle text-white text-xl mr-3 mt-0.5'></i>
+                                    <p class="text-white">El uso de herramientas que permitan visualizar metas y resultados.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Fortalezas Identificadas -->
+                <div class="bg-white rounded-2xl shadow-modern overflow-hidden h-full">
+                    <div class="border-b border-gray-100 px-8 py-6">
+                        <h3 class="text-xl font-semibold font-heading text-gray-800">Fortalezas Identificadas</h3>
+                    </div>
+                    <div class="p-8">
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="bg-green-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0">
+                                    <i class='bx bx-check text-green-600 text-xl'></i>
+                                </div>
+                                <p class="text-gray-700">
+                                    Estableces metas a corto plazo y realizas <span class="font-semibold">revisiones constantes</span> para mantener el foco.
+                                </p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-green-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0">
+                                    <i class='bx bx-check text-green-600 text-xl'></i>
+                                </div>
+                                <p class="text-gray-700">
+                                    Utilizas herramientas digitales (Excel o software sencillo) para dar seguimiento a indicadores.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 3: Oportunidades de Mejora -->
+                <div class="bg-white rounded-2xl shadow-modern overflow-hidden h-full">
+                    <div class="border-b border-gray-100 px-8 py-6">
+                        <h3 class="text-xl font-semibold font-heading text-gray-800">Oportunidades de Mejora</h3>
+                    </div>
+                    <div class="p-8">
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="bg-amber-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0">
+                                    <i class='bx bx-bell text-amber-600 text-xl'></i>
+                                </div>
+                                <p class="text-gray-700">
+                                    Migrar hacia un <span class="font-semibold">tablero compartido</span> más robusto para que todos vean el progreso en tiempo real.
+                                </p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-amber-100 rounded-full p-1 mr-3 mt-1 flex-shrink-0">
+                                    <i class='bx bx-bell text-amber-600 text-xl'></i>
+                                </div>
+                                <p class="text-gray-700">
+                                    Estructurar mejor las reuniones de retroalimentación, definiendo responsabilidades claras para cada meta.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de recomendaciones de expertos -->
+            <div class="mb-4">
+                <h3 class="text-xl font-semibold font-heading text-gray-800 mb-3">Recomendaciones de expertos de TruMentor</h3>
+            </div>
+            
+            <!-- Grid de expertos en 2 filas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+                <!-- Experto 1: Mentor Gru -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md">
+                    <div class="flex items-start">
+                        <div class="logo-bg w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3">
+                            <span class="text-white text-base font-bold font-heading">G</span>
+                        </div>
+                        <div>
+                            <div class="flex items-center mb-1">
+                                <h4 class="font-semibold text-gray-900 mr-2 text-sm">Mentor Gru</h4>
+                                <span class="text-gray-500 text-xs">Consultor Estratégico IA</span>
+                            </div>
+                            <div class="text-sm text-gray-700">
+                                "Excelente trabajo poniendo metas y revisándolas con frecuencia. Mi consejo es que des un paso más y adoptes una solución colaborativa, donde tu equipo también pueda visualizar y actualizar los avances. Mantener esa disciplina y organización te permitirá aprovechar el impulso y planificar el crecimiento con mayor eficacia."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experto 2: Experto en Operaciones -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md">
+                    <div class="flex items-start">
+                        <div class="bg-yellow-600 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3">
+                            <span class="text-white text-base font-bold font-heading">O</span>
+                        </div>
+                        <div>
+                            <div class="flex items-center mb-1">
+                                <h4 class="font-semibold text-gray-900 mr-2 text-sm">Miguel Torres</h4>
+                                <span class="text-gray-500 text-xs">Especialista en Operaciones IA</span>
+                            </div>
+                            <div class="text-sm text-gray-700">
+                                "Tu habilidad para mantener el seguimiento es clave. Te sugiero implementar un sistema de 'Daily Standups' de 15 minutos donde cada miembro del equipo comparta: ¿Qué logró ayer? ¿Qué hará hoy? ¿Qué obstáculos enfrenta? Esto mantendrá a todos alineados sin sacrificar tiempo productivo en <span class="empresa-resaltado">Amobla</span>."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experto 3: Experto en Finanzas -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md">
+                    <div class="flex items-start">
+                        <div class="bg-green-700 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3">
+                            <span class="text-white text-base font-bold font-heading">F</span>
+                        </div>
+                        <div>
+                            <div class="flex items-center mb-1">
+                                <h4 class="font-semibold text-gray-900 mr-2 text-sm">Ana Martínez</h4>
+                                <span class="text-gray-500 text-xs">Consultora Financiera IA</span>
+                            </div>
+                            <div class="text-sm text-gray-700">
+                                "Tu disciplina de ejecución es impresionante. Aprovecha esta fortaleza conectando tus metas operativas con indicadores financieros clave para <span class="empresa-resaltado">Amobla</span>. Determina qué métricas impactan directamente en tu flujo de caja y margen. Así cada acción tendrá un propósito económico claro, facilitando decisiones de inversión en crecimiento."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experto 4: Experto en OKRs -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-4 transition-all duration-300 hover:shadow-md">
+                    <div class="flex items-start">
+                        <div class="bg-indigo-800 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-md mr-3">
+                            <span class="text-white text-base font-bold font-heading">K</span>
+                        </div>
+                        <div>
+                            <div class="flex items-center mb-1">
+                                <h4 class="font-semibold text-gray-900 mr-2 text-sm">Diego Ramírez</h4>
+                                <span class="text-gray-500 text-xs">Especialista en OKRs IA</span>
+                            </div>
+                            <div class="text-sm text-gray-700">
+                                "Con tu base sólida, es momento de adoptar OKRs (Objetivos y Resultados Clave): define 3-5 objetivos ambiciosos trimestrales y para cada uno, 2-3 resultados clave medibles. Lo que funciona bien en <span class="empresa-resaltado">Amobla</span> es separar los OKRs estratégicos (innovación, nuevos mercados) de los operativos (eficiencia, productividad). ¡Simple pero poderoso!"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-md py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <div class="logo-bg w-8 h-8 rounded-full flex items-center justify-center shadow-sm mr-2">
+                        <span class="text-white text-sm font-heading font-bold">T</span>
+                    </div>
+                    <span class="text-sm text-gray-600">© 2025 TruMentor. Todos los derechos reservados.</span>
+                </div>
+                <div class="flex space-x-4 text-sm">
+                    <a href="#" class="text-gray-500 hover:text-brand-500 transition-colors">Ayuda</a>
+                    <a href="#" class="text-gray-500 hover:text-brand-500 transition-colors">Privacidad</a>
+                    <a href="#" class="text-gray-500 hover:text-brand-500 transition-colors">Términos</a>
+                    <a href="#" class="text-gray-500 hover:text-brand-500 transition-colors">Contacto
